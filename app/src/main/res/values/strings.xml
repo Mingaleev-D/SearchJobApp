@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">SearchJobApp</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="image_favorite">image_favorite</string>
     <string name="logo">company logo</string>
 
@@ -11,4 +10,12 @@
     <string name="Delete">Delete</string>
     <string name="Job_Deleted">Job deleted</string>
     <string name="Cancel">Cancel</string>
+    <string name="search">Search...</string>
+    <string name="no_jobs_saved">No Jobs Saved</string>
+
+    <string name="Jobs">Jobs</string>
+    <string name="Search">Search</string>
+    <string name="Saved_Jobs">Saved Jobs</string>
+
+
 </resources>

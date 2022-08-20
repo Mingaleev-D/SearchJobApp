@@ -32,9 +32,9 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         val adapter = FragmentPagerItemAdapter(
             childFragmentManager,
             FragmentPagerItems.with(activity)
-                .add("Jobs", RemoteJobFragment::class.java)
-                .add("Search", SearchJobFragment::class.java)
-                .add("Saved Jobs", SavedJobFragment::class.java)
+                .add(R.string.Jobs, RemoteJobFragment::class.java)
+                .add(R.string.search, SearchJobFragment::class.java)
+                .add(R.string.Saved_Jobs, SavedJobFragment::class.java)
                 .create()
         )
         binding.viewpager.adapter = adapter

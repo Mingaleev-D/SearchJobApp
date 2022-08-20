@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Поиск Работы</string>
+    <string name="image_favorite">Фаворит</string>
+    <string name="logo">Логотип</string>
+    <string name="Job_Saved_Successfully">Сохранено успешно</string>
+    <string name="Delete_Job">Удалeние</string>
+    <string name="Are_you_sure_you_want_to_delete_job">Вы уверены, что хотите удалить?</string>
+    <string name="Delete">Удалить</string>
+    <string name="Job_Deleted">Работа удалена</string>
+    <string name="Cancel">Отмена</string>
+    <string name="search">Поиск</string>
+    <string name="Jobs">Работа</string>
+    <string name="Search">Поиск</string>
+    <string name="Saved_Jobs">Сохраненные</string>
+    <string name="no_jobs_saved">Не сохранено</string>
+</resources>
