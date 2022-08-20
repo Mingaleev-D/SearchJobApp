@@ -1,4 +1,4 @@
-# Travel APP | Путешествие
+# Search Job APP | Поиск работы
 
 ### Мингалеев Динар | Mingaleev Dinar
 > Mingaleev-D92
