@@ -11,13 +11,14 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.searchjobapp.databinding.JobLayoutAdapterBinding
 import com.example.searchjobapp.fragments.MainFragmentDirections
 import com.example.searchjobapp.models.Job
+import com.example.searchjobapp.models.JobToSave
 
 /**
  * @author : Mingaleev D
  * @data : 20/08/2022
  */
 
-class RemoteJobAdapter : RecyclerView.Adapter<RemoteJobAdapter.RemoteJobViewHolder>() {
+class FavJobAdapter: RecyclerView.Adapter<FavJobAdapter.RemoteJobViewHolder>() {
 
     private var binding: JobLayoutAdapterBinding? = null
 
@@ -25,14 +26,15 @@ class RemoteJobAdapter : RecyclerView.Adapter<RemoteJobAdapter.RemoteJobViewHold
         RecyclerView.ViewHolder(itemBinding.root)
 
     private val differCallback = object :
-        DiffUtil.ItemCallback<Job>() {
-        override fun areItemsTheSame(oldItem: Job, newItem: Job): Boolean {
+        DiffUtil.ItemCallback<JobToSave>() {
+        override fun areItemsTheSame(oldItem: JobToSave, newItem: JobToSave): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: Job, newItem: Job): Boolean {
+        override fun areContentsTheSame(oldItem: JobToSave, newItem: JobToSave): Boolean {
             return oldItem == newItem
         }
+
     }
 
     val differ = AsyncListDiffer(this, differCallback)
@@ -65,8 +67,27 @@ class RemoteJobAdapter : RecyclerView.Adapter<RemoteJobAdapter.RemoteJobViewHold
             binding?.tvDate?.text = dateJob?.get(0)
 
         }.setOnClickListener { mView ->
+            val tags = arrayListOf<String>()
+
+            val job = Job(
+                currentJob.candidateRequiredLocation,
+                currentJob.category,
+                currentJob.companyLogoUrl,
+                currentJob.companyName,
+                currentJob.description,
+                currentJob.jobId,
+                currentJob.jobType,
+                currentJob.publicationDate,
+                currentJob.salary,
+                tags,
+                currentJob.title,
+                currentJob.url
+            )
+
+
+
             val direction = MainFragmentDirections
-                .actionMainFragmentToJobDetailsViewsFragment(currentJob)
+                .actionMainFragmentToJobDetailsViewsFragment(job)
             mView.findNavController().navigate(direction)
         }
     }
