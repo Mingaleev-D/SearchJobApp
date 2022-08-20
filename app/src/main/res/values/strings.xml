@@ -6,4 +6,9 @@
     <string name="logo">company logo</string>
 
     <string name="Job_Saved_Successfully">Job saved successfully</string>
+    <string name="Delete_Job">Delete Job</string>
+    <string name="Are_you_sure_you_want_to_delete_job">Are you sure you want to?</string>
+    <string name="Delete">Delete</string>
+    <string name="Job_Deleted">Job deleted</string>
+    <string name="Cancel">Cancel</string>
 </resources>

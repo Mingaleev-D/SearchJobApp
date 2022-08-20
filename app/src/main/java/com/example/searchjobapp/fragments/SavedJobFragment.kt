@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.searchjobapp.MainActivity
@@ -15,7 +17,7 @@ import com.example.searchjobapp.models.JobToSave
 import com.example.searchjobapp.viewmodel.RemoteJobViewModel
 
 
-class SavedJobFragment : Fragment(R.layout.fragment_saved_job) {
+class SavedJobFragment : Fragment(R.layout.fragment_saved_job), FavJobAdapter.OnItemClickListener {
     private var mBinding: FragmentSavedJobBinding? = null
     private val binding get() = mBinding!!
     private lateinit var viewModel: RemoteJobViewModel
@@ -36,7 +38,7 @@ class SavedJobFragment : Fragment(R.layout.fragment_saved_job) {
     }
 
     private fun setUpRecyclerView() {
-        favAdapter = FavJobAdapter()
+        favAdapter = FavJobAdapter(this)
         binding.rvJobsSaved.apply {
             layoutManager = LinearLayoutManager(activity)
             setHasFixedSize(true)
@@ -54,12 +56,29 @@ class SavedJobFragment : Fragment(R.layout.fragment_saved_job) {
         if (job.isNotEmpty()) {
             binding.rvJobsSaved.visibility = View.VISIBLE
             binding.cardNoAvailable.visibility = View.GONE
-        }else {
+        } else {
             binding.rvJobsSaved.visibility = View.GONE
             binding.cardNoAvailable.visibility = View.VISIBLE
         }
     }
 
+    override fun onItemClick(job: JobToSave, view: View, position: Int) {
+        deleteJob(job)
+    }
+
+    private fun deleteJob(job: JobToSave) {
+        activity?.let {
+            AlertDialog.Builder(it).apply {
+                setTitle(R.string.Delete_Job)
+                setMessage(R.string.Are_you_sure_you_want_to_delete_job)
+                setPositiveButton(R.string.Delete) { _, _ ->
+                    viewModel.deleteJob(job)
+                    Toast.makeText(activity, R.string.Job_Deleted, Toast.LENGTH_SHORT).show()
+                }
+                setNegativeButton(R.string.Cancel,null)
+            }.create().show()
+        }
+    }
 
     override fun onDestroy() {
         super.onDestroy()

@@ -1,7 +1,9 @@
 package com.example.searchjobapp.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
@@ -18,7 +20,9 @@ import com.example.searchjobapp.models.JobToSave
  * @data : 20/08/2022
  */
 
-class FavJobAdapter: RecyclerView.Adapter<FavJobAdapter.RemoteJobViewHolder>() {
+class FavJobAdapter constructor(
+    private val itemClick: OnItemClickListener
+) : RecyclerView.Adapter<FavJobAdapter.RemoteJobViewHolder>() {
 
     private var binding: JobLayoutAdapterBinding? = null
 
@@ -63,6 +67,8 @@ class FavJobAdapter: RecyclerView.Adapter<FavJobAdapter.RemoteJobViewHolder>() {
             binding?.tvJobTitle?.text = currentJob.title
             binding?.tvJobType?.text = currentJob.jobType
 
+            binding?.ibDelete?.visibility = View.VISIBLE
+
             val dateJob = currentJob.publicationDate?.split("T")
             binding?.tvDate?.text = dateJob?.get(0)
 
@@ -90,9 +96,23 @@ class FavJobAdapter: RecyclerView.Adapter<FavJobAdapter.RemoteJobViewHolder>() {
                 .actionMainFragmentToJobDetailsViewsFragment(job)
             mView.findNavController().navigate(direction)
         }
+
+        holder.itemView.apply {
+            binding?.ibDelete?.setOnClickListener {
+                itemClick.onItemClick(currentJob,binding?.ibDelete!!,position)
+            }
+        }
     }
 
     override fun getItemCount(): Int {
         return differ.currentList.size
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(
+            job:JobToSave,
+            view: View,
+            position: Int
+        )
     }
 }
